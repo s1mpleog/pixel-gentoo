@@ -1,0 +1,212 @@
+/* style.css */
+@define-color bar-bg rgba(0, 0, 0, 0);
+@define-color main-bg #282828;
+@define-color main-fg #ebdbb2;
+@define-color wb-act-bg #d79921;
+@define-color wb-act-fg #282828;
+@define-color wb-hvr-bg #fabd2f;
+@define-color wb-hvr-fg #282828;
+@define-color wb-purple #b16286;
+
+* {
+    font-family: "Monocraft Nerd Font";
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: @bar-bg;
+    color: @main-fg;
+}
+
+/* Logo - distinctive colored box */
+#custom-logo {
+    padding: 4px 12px;
+    margin: 4px 2px;
+    color: @wb-act-fg;
+    font-size: 12px;
+    font-weight: 700;
+    background-color: @wb-act-bg;
+    border-radius: 4px;
+}
+
+
+
+/* Workspaces - numbered boxes */
+#workspaces {
+    background-color: transparent;
+    margin: 4px 4px;
+    padding: 0;
+}
+
+#workspaces button {
+    padding: 4px 10px;
+    margin: 0 2px;
+    color: @main-fg;
+    background-color: @main-bg;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    min-width: 28px;
+}
+
+#workspaces button.active {
+    color: @wb-act-fg;
+    background-color: @wb-purple;
+}
+
+#workspaces button:hover {
+    color: @wb-hvr-fg;
+    background-color: @wb-purple;
+;
+}
+
+/* Window title - centered with icon */
+#window {
+    margin: 4px 8px;
+    padding: 4px 12px;
+    color: @main-fg;
+    background-color: @main-bg;
+    border-radius: 4px;
+    font-weight: 400;
+}
+
+/* Right modules - individual colored boxes */
+#cpu {
+    padding: 4px 10px;
+    margin: 4px 2px;
+    background-color: @main-bg;
+    color: #fe8019;
+    border-radius: 4px;
+}
+
+#memory {
+    padding: 4px 10px;
+    margin: 4px 2px;
+    background-color: @main-bg;
+    color: @wb-act-bg;
+    border-radius: 4px;
+}
+
+#backlight {
+    padding: 4px 10px;
+    margin: 4px 2px;
+    background-color: @main-bg;
+    color: @wb-hvr-bg;
+    border-radius: 4px;
+}
+
+#battery {
+    padding: 4px 10px;
+    margin: 4px 2px;
+    background-color: @main-bg;
+    color: #98971a;
+    border-radius: 4px;
+}
+
+#battery.charging {
+    color: #b8bb26;
+}
+
+#battery.warning:not(.charging) {
+    background-color: @wb-act-bg;
+    color: @wb-act-fg;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #cc241d;
+    color: @main-fg;
+    animation: blink 0.5s ease-in-out infinite alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: #fb4934;
+    }
+}
+
+#network {
+    padding: 4px 10px;
+    margin: 4px 2px;
+    background-color: @main-bg;
+    color: #83a598;
+    border-radius: 4px;
+}
+
+#network.disconnected {
+    background-color: #cc241d;
+    color: @main-fg;
+}
+
+#wireplumber {
+    padding: 4px 10px;
+    margin: 4px 2px;
+    background-color: @main-bg;
+    color: #d3869b;
+    border-radius: 4px;
+}
+
+#wireplumber.muted {
+    color: #665c54;
+}
+
+#custom-disk {
+    padding: 4px 10px;
+    margin: 4px 2px;
+    background-color: @main-bg;
+    color: #689d6a;
+    border-radius: 4px;
+}
+
+#idle_inhibitor {
+    padding: 4px 10px;
+    margin: 4px 2px;
+    background-color: @main-bg;
+    color: #7c6f64;
+    border-radius: 4px;
+}
+
+#idle_inhibitor.activated {
+    background-color: @wb-act-bg;
+    color: @wb-act-fg;
+}
+
+#clock {
+    padding: 4px 12px;
+    margin: 4px 2px;
+    color: @wb-act-fg;
+    background-color: @wb-purple;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+#tray {
+    padding: 4px 8px;
+    margin: 4px 2px;
+    background-color: @main-bg;
+    border-radius: 4px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    color: #fb4934;
+}
+
+/* Tooltips */
+tooltip {
+    background-color: @main-bg;
+    border: 1px solid #504945;
+    border-radius: 4px;
+    color: @main-fg;
+    padding: 8px 12px;
+}
+
+tooltip label {
+    color: @main-fg;
+}

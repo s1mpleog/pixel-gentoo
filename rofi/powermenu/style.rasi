@@ -1,0 +1,148 @@
+/*--------------------------------------------------------------------------------
+ *                                                                                
+ *                                                                               
+ *  ,------.                                  ,---.   ,--.           ,--.        
+ *  |  .--. ' ,---. ,--.   ,--. ,---. ,--.--.'   .-',-'  '-.,--. ,--.|  | ,---.  
+ *  |  '--' || .-. ||  |.'.|  || .-. :|  .--'`.  `-.'-.  .-' \  '  / |  || .-. : 
+ *  |  | --' ' '-' '|   .'.   |\   --.|  |   .-'    | |  |    \   '  |  |\   --. 
+ *  `--'      `---' '--'   '--' `----'`--'   `-----'  `--'  .-'  /   `--' `----' 
+ *                                                          `---'                
+ *
+ *
+ *      , _ ,        RESUME: powermenu's style and adapted to minimal config
+ *     ( o o )              
+ *    /'` ' `'\
+ *    |'''''''|      AUTHOR:  Andr3xDev
+ *    |\\'''//|      URL: https://github.com/Andr3xDev/Dotfiles
+ *       """                                              
+--------------------------------------------------------------------------------*/
+
+
+
+/*------------------------------------------------------------------------------
+ *    Import Elements
+-------------------------------------------------------------------------------*/
+
+
+
+
+/*------------------------------------------------------------------------------
+ *    Configuration
+-------------------------------------------------------------------------------*/
+
+configuration {
+    show-icons:                 false;
+}
+
+
+
+/*------------------------------------------------------------------------------
+ *    Window conf
+-------------------------------------------------------------------------------*/
+
+window {
+    /* properties for window widget */
+    transparency:                "real";
+    location:                    center;
+    fullscreen:                  false;
+    width:                       390px;
+    /* properties for all widgets */
+    enabled:                     true;
+    border: 			 2px;
+    border-color:                #504945;
+    border-radius:               8px;
+    cursor:                      "default";
+    background-color:            #282828;
+}
+/*------------------------------------------------------------------------------
+ *    Main Box
+-------------------------------------------------------------------------------*/
+mainbox {
+    enabled:                     true;
+    spacing:                     15px;
+    padding:                     30px;
+    background-color:            transparent;
+    children:                    [ "inputbar", "listview" ];
+}
+/*------------------------------------------------------------------------------
+ *    Info // Inputbar
+-------------------------------------------------------------------------------*/
+inputbar {
+    location:			 center;
+    padding:                     8px;
+    border-radius:               10px;
+    border: 			 2px solid;
+    border-color: 		 #83a598;
+    background-color:            transparent;
+    children:                    ["prompt"];
+}
+prompt {
+    padding: 			 6px;
+    border-radius:               100%;
+    background-color:            transparent;
+    text-color:                  #ebdbb2;
+}
+/*------------------------------------------------------------------------------
+ *    Mesagge
+-------------------------------------------------------------------------------*/
+message {
+    padding:                     10px;
+    border-radius:               10px;
+    border:  			 2px solid;
+    border-color:		 #fe8019;
+    background-color:            transparent;
+    text-color:                  #ebdbb2;
+}
+textbox {
+    background-color:            inherit;
+    text-color:                  inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+    placeholder-color:           #ebdbb2;
+    blink:                       true;
+    markup:                      true;
+}
+error-message {
+    padding:                     12px;
+    border:                      0px solid;
+    background-color:            #282828;
+    text-color:                  #ebdbb2;
+}
+/*------------------------------------------------------------------------------
+ *    Elements box // Listview
+-------------------------------------------------------------------------------*/
+listview {
+    enabled:                     true;
+    columns:                     4;
+    lines:                       1;
+    spacing:                     18px;
+    background-color:            transparent;
+    text-color:                  #ebdbb2;
+}
+/*------------------------------------------------------------------------------
+ *    Elements
+-------------------------------------------------------------------------------*/
+element {
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     14px 10px;
+    border-radius:               100%;
+    border-radius:               10px;
+    border:                      2px solid;
+    border-color: 		 #b8bb26;
+    background-color:            #3c3836;
+    text-color:                  #ebdbb2;
+    cursor:                      pointer;
+}
+element-text {
+    font:                        "RecMonoCasualNerdFont 16";
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
+element selected.normal {
+    border-color: 		 #fb4934;
+    text-color:                  #fb4934;
+}

@@ -1,0 +1,47 @@
+# Gruvbox Dark Theme for Mako
+font=Monocraft Nerd Font 11
+background-color=#282828FF
+text-color=#ebdbb2FF
+border-color=#8ec07c
+border-size=2
+border-radius=8
+width=400
+height=150
+margin=20
+padding=15,20
+
+# Icon settings
+icon-path=/usr/share/icons/Papirus-Dark
+max-icon-size=48
+
+# Timeouts
+default-timeout=5000
+ignore-timeout=1
+
+# Progress bar
+progress-color=over #504945FF
+
+# Grouping and visibility
+group-by=app-name
+max-visible=5
+
+# Positioning
+anchor=top-right
+layer=overlay
+
+# Urgency specific colors
+[urgency=low]
+background-color=#282828FF
+text-color=#a89984FF
+border-color=#665c54FF
+
+[urgency=normal]
+background-color=#282828FF
+text-color=#ebdbb2FF
+border-color=#8ec07c
+
+[urgency=critical]
+background-color=#282828FF
+text-color=#fb4934FF
+border-color=#cc241dFF
+default-timeout=0

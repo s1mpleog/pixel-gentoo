@@ -1,0 +1,194 @@
+//config.jsonc
+{
+  "layer": "top",
+  "position": "top",
+  "height": 30,
+  "spacing": 4,
+  "modules-left": [
+    "hyprland/workspaces",
+    "idle_inhibitor",
+    "hyprland/window"
+  ],
+  // "modules-center": [
+  //   "hyprland/window"
+  // ],
+  "modules-right": [
+    "wireplumber",
+    "custom/sep2",
+    "backlight",
+    "custom/sep3",
+    "network",
+    "custom/sep4",
+    "cpu",
+    "custom/sep5",
+    "memory",
+    "custom/sep6",
+    "custom/disk",
+    "custom/sep7",
+    "battery",
+    "custom/sep8",
+    "clock",
+    "tray"
+  ],
+  "custom/logo": {
+    "format": "Arch",
+    "tooltip": false
+  },
+  "custom/sep2": {
+    "format": "|",
+    "tooltip": false
+  },
+  "custom/sep3": {
+    "format": "|",
+    "tooltip": false
+  },
+  "custom/sep4": {
+    "format": "|",
+    "tooltip": false
+  },
+  "custom/sep5": {
+    "format": "|",
+    "tooltip": false
+  },
+  "custom/sep6": {
+    "format": "|",
+    "tooltip": false
+  },
+  "custom/sep7": {
+    "format": "|",
+    "tooltip": false
+  },
+  "custom/sep8": {
+    "format": "|",
+    "tooltip": false
+  },
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "on-click": "activate",
+    "all-outputs": true,
+    "format-icons": {
+      "1": "壹",
+      "2": "貳",
+      "3": "參",
+      "4": "肆",
+      "5": "伍",
+      "6": "陸",
+      "7": "柒",
+      "8": "捌",
+      "9": "玖",
+      "10": "拾",
+      "default": "〇"
+    },
+    "persistent-workspaces": {
+      "*": 5
+    }
+  },
+  "hyprland/window": {
+    "format": "{}",
+    "max-length": 50,
+    "separate-outputs": true,
+    "rewrite": {
+      "": "Desktop"
+    }
+  },
+  "clock": {
+    "format": "󰥔 {:%I:%M %p}",
+    "format-alt": "󰥔 {:%a, %d %b %Y}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "left",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#fabd2f'><b>{}</b></span>",
+        "days": "<span color='#ebdbb2'><b>{}</b></span>",
+        "weeks": "<span color='#98971a'><b>W{}</b></span>",
+        "weekdays": "<span color='#d79921'><b>{}</b></span>",
+        "today": "<span color='#fb4934'><b><u>{}</u></b></span>"
+      }
+    }
+  },
+  "cpu": {
+    "format": "󰻠 {usage}%",
+    "tooltip": true,
+    "interval": 2
+  },
+  "memory": {
+    "format": "󰍛 {used:0.1f}G/{total:0.1f}G",
+    "tooltip-format": "{percentage}% used"
+  },
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": [
+      "󰃞",
+      "󰃟",
+      "󰃠"
+    ],
+    "on-scroll-up": "brightnessctl set +5%",
+    "on-scroll-down": "brightnessctl set 5%-",
+    "tooltip-format": "Brightness: {percent}%"
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-icons": [
+      "󰂎",
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹"
+    ],
+    "tooltip-format": "{timeTo}, {capacity}%"
+  },
+  "network": {
+    "format-wifi": "󰤨 {signalStrength}%",
+    "format-ethernet": "󰈀 Connected",
+    "format-disconnected": "󰤭 Down",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%)\n{ipaddr}/{cidr}",
+    "tooltip-format-ethernet": "{ifname}\n{ipaddr}/{cidr}",
+    "on-click": "nm-connection-editor"
+  },
+  "wireplumber": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰖁 {volume}%",
+    "format-icons": {
+      "headphone": "󰋋",
+      "default": [
+        "󰕿",
+        "󰖀",
+        "󰕾"
+      ]
+    },
+    "on-click": "pavucontrol",
+    "tooltip-format": "{node_name}"
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰅶",
+      "deactivated": "󰾪"
+    },
+    "tooltip-format-activated": "Idle inhibitor active",
+    "tooltip-format-deactivated": "Idle inhibitor inactive"
+  },
+  "custom/disk": {
+    "format": "󰋊 {}",
+    "interval": 30,
+    "exec": "df -h / | awk 'NR==2 {print $4}'"
+  },
+  "tray": {
+    "icon-size": 18,
+    "spacing": 6
+  }
+}

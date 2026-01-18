@@ -1,0 +1,30 @@
+{
+    "label" : "lock",
+    "action" : "loginctl lock-session",
+    "text" : "Lock"
+}
+{
+    "label" : "reboot",
+    "action" : "doas openrc-shutdown -r now",
+    "text" : "Reboot"
+}
+{
+    "label" : "shutdown",
+    "action" : "doas openrc-shutdown -p now",
+    "text" : "Shutdown"
+}
+{
+    "label" : "logout",
+    "action" : "loginctl terminate-session self",
+    "text" : "Logout"
+}
+{
+    "label" : "suspend",
+    "action" : "rc-service suspend start",
+    "text" : "Suspend"
+}
+{
+    "label" : "reboot-to-fw",
+    "action" : "efibootmgr -n 0000 && openrc-shutdown -r now",
+    "text" : "Reboot to UEFI"
+}

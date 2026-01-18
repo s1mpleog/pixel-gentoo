@@ -1,0 +1,14 @@
+* {
+    background:       #1d2021ff;
+    foreground:       #ebdbb2ff;
+    accent:           #d79921ff;
+    background-tb:    #98971aff;
+    border-tb:        #fabd2fff;
+    border:           #665c54ff;
+    selected:         #98971aff;
+    button:           #504945ff;
+    button-selected:  #d79921ff;
+    active:           #fabd2fff;
+    urgent:           #ea6962ff;
+    font: "Monocraft Nerd Font 10";
+}

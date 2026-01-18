@@ -1,0 +1,14 @@
+* {
+  background:       #1E1E2ECC; /* base */
+  foreground:       #CDD6F4FF; /* text */
+  accent:           #BAC2DE69; /* subtle accent */
+  background-tb:    #45475AFF; /* surface0 */
+  border-tb:        #313244FF; /* surface1 */
+  border:           #cba6f7ff;
+  selected:         linear-gradient(to right, #313244FF, #BAC2DE69);
+  button:           linear-gradient(#9399B2FF);
+  button-selected:  linear-gradient(#BAC2DE69);
+  active:           linear-gradient(to right, #94E2D5FF, #A6E3A1FF);
+  urgent:           #F38BA8FF; /* red */
+}
+

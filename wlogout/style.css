@@ -1,0 +1,85 @@
+window {
+    font-family: Monocraft Nerd Font, monospace;
+    font-size: 14pt;
+    background: transparent;
+}
+
+button {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 20%;
+    border: none;
+    border-radius: 8px;
+    text-shadow: none;
+    background-color: rgba(40, 40, 40, 0.85); /* #282828 w/ alpha */
+    margin: 10px;
+    transition: all 0.2s ease-in-out;
+    min-width: 150px;
+    min-height: 150px;
+}
+
+button:hover {
+    background-color: rgba(60, 56, 54, 0.90); /* #3c3836 hover */
+    border: 2px solid #504945;
+}
+
+button:focus {
+    background-color: #83a598; /* Gruvbox yellow */
+    color: #282828;
+    text-shadow: none;
+    border: 2px solid #83a598;
+}
+
+#lock {
+    background-image: image(url("./icons/lock.png"));
+}
+
+#lock:focus {
+    background-image: image(url("./icons/lock-hover.png"));
+}
+
+#logout {
+    background-image: image(url("./icons/logout.png"));
+}
+
+#logout:focus {
+    background-image: image(url("./icons/logout-hover.png"));
+}
+
+#suspend {
+    background-image: image(url("./icons/sleep.png"));
+}
+
+#suspend:focus {
+    background-image: image(url("./icons/sleep-hover.png"));
+}
+
+#shutdown {
+    background-image: image(url("./icons/power.png"));
+}
+
+#shutdown:focus {
+    background-image: image(url("./icons/power-hover.png"));
+    background-color: #cc241d; /* Red for shutdown */
+    border: 2px solid #fb4934;
+}
+
+#reboot {
+    background-image: image(url("./icons/restart.png"));
+}
+
+#reboot:focus {
+    background-image: image(url("./icons/restart-hover.png"));
+    background-color: #fe8019; /* Orange for reboot */
+    border: 2px solid #d65d0e;
+}
+
+#reboot-to-fw {
+    background-image: image(url("./icons/wrench.png"));
+}
+
+#reboot-to-fw:focus {
+    background-image: image(url("./icons/wrench-hover.png"));
+    background-color: #458588; /* Blue for firmware */
+    border: 2px solid #83a598;
+}
