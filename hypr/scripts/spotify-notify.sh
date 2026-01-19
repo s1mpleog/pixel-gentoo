@@ -1,42 +1,46 @@
-#!/usr/bin/env bash
+#!/usr/bin/dash
 
-# Config
-ICON="/home/s1mple/.config/mako/heart.png" # your pixel purple heart
-URGENCY_NORMAL="normal"
-URGENCY_LOW="low"
+# Your config
+ICON="$HOME/.config/mako/heart.png" # or full path
+PLAYER="spotify"
+LAST_TITLE=""
+CHECK_INTERVAL=3 # seconds - lower = more responsive, but slightly more CPU
 
-function send_notif() {
-  makoctl dismiss -a >/dev/null 2>&1
-  notify-send \
-    -u "$2" \
-    -a "Spotify" \
-    -i "$ICON" \
-    "$1" \
-    "$3"
-}
+while true; do
+  # Get current status and metadata (quick & safe)
+  status=$(playerctl --player="$PLAYER" playback-status 2>/dev/null || echo "Stopped")
+  title=$(playerctl --player="$PLAYER" metadata title 2>/dev/null || echo "")
 
-# Main loop using --follow (playerctl 2.x+)
-playerctl --player=spotify --follow metadata 2>/dev/null | while read -r line; do
-  # Extract on new track (xesam:title changes most reliably)
-  if [[ "$line" =~ xesam:title ]]; then
-    artist=$(playerctl --player=spotify metadata artist 2>/dev/null || echo "Unknown")
-    title=$(playerctl --player=spotify metadata title 2>/dev/null || echo "Unknown")
-    album=$(playerctl --player=spotify metadata album 2>/dev/null || echo "")
+  # New track? Send full "Now Playing"
+  # POSIX equivalent of [[ "$title" != "$LAST_TITLE" && -n "$title" ]]
+  if [ "$title" != "$LAST_TITLE" ] && [ -n "$title" ]; then
+    artist=$(playerctl --player="$PLAYER" metadata artist 2>/dev/null || echo "Unknown")
+    album=$(playerctl --player="$PLAYER" metadata album 2>/dev/null || echo "")
 
     msg="$artist — $title"
-    [[ -n "$album" ]] && msg="$msg\n<i>$album</i>"
+    if [ -n "$album" ]; then
+      msg="$msg
+<i>$album</i>"
+    fi
 
-    send_notif "Now Playing" "$URGENCY_NORMAL" "$msg"
+    makoctl dismiss -a >/dev/null 2>&1
+    notify-send -u normal -a "Spotify" -i "$ICON" "Now Playing" "$msg"
+    LAST_TITLE="$title"
   fi
-done &
 
-# Handle playback status changes separately (another follow)
-playerctl --player=spotify --follow playback-status 2>/dev/null | while read -r status; do
+  # Handle playback status changes (simple icons)
   case "$status" in
-  Playing) send_notif "Spotify" "$URGENCY_LOW" "▶ Playing" ;;
-  Paused) send_notif "Spotify" "$URGENCY_LOW" "⏸ Paused" ;;
-  Stopped) send_notif "Spotify" "$URGENCY_LOW" "⏹ Stopped" ;;
+  Playing)
+    notify-send -u low -a "Spotify" -i "$ICON" "Spotify" "▶ Playing"
+    ;;
+  Paused)
+    notify-send -u low -a "Spotify" -i "$ICON" "Spotify" "⏸ Paused"
+    ;;
+  Stopped)
+    # Optional:
+    # notify-send -u low -a "Spotify" -i "$ICON" "Spotify" "⏹ Stopped"
+    ;;
   esac
-done &
 
-wait # Keep script alive
+  sleep "$CHECK_INTERVAL"
+done
