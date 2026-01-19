@@ -1,0 +1,33 @@
+[Added Associations]
+inode/directory=yazi.desktop
+x-scheme-handler/http=userapp-Nightly-OA6GI3.desktop;firefox.desktop;userapp-Nightly-QY6HF3.desktop;
+x-scheme-handler/https=userapp-Nightly-OA6GI3.desktop;firefox.desktop;userapp-Nightly-QY6HF3.desktop;
+x-scheme-handler/chrome=userapp-Nightly-OA6GI3.desktop;firefox.desktop;userapp-Nightly-QY6HF3.desktop;
+text/html=userapp-Nightly-QY6HF3.desktop;firefox.desktop;userapp-Nightly-OA6GI3.desktop;
+application/x-extension-htm=userapp-Nightly-QY6HF3.desktop;firefox.desktop;userapp-Nightly-OA6GI3.desktop;
+application/x-extension-html=userapp-Nightly-QY6HF3.desktop;firefox.desktop;userapp-Nightly-OA6GI3.desktop;
+application/x-extension-shtml=userapp-Nightly-QY6HF3.desktop;firefox.desktop;userapp-Nightly-OA6GI3.desktop;
+application/xhtml+xml=userapp-Nightly-QY6HF3.desktop;firefox.desktop;userapp-Nightly-OA6GI3.desktop;
+application/x-extension-xhtml=userapp-Nightly-QY6HF3.desktop;firefox.desktop;userapp-Nightly-OA6GI3.desktop;
+application/x-extension-xht=userapp-Nightly-QY6HF3.desktop;firefox.desktop;userapp-Nightly-OA6GI3.desktop;
+
+[Default Applications]
+inode/directory=thunar.desktop
+x-scheme-handler/http=userapp-Nightly-OA6GI3.desktop
+x-scheme-handler/https=brave-browser-nightly.desktop
+x-scheme-handler/chrome=brave-browser-nightly.desktop
+text/html=brave-browser-nightly.desktop
+application/x-extension-htm=userapp-Nightly-OA6GI3.desktop
+application/x-extension-html=userapp-Nightly-OA6GI3.desktop
+application/x-extension-shtml=userapp-Nightly-OA6GI3.desktop
+application/xhtml+xml=userapp-Nightly-OA6GI3.desktop
+application/x-extension-xhtml=userapp-Nightly-OA6GI3.desktop
+application/x-extension-xht=userapp-Nightly-OA6GI3.desktop
+x-scheme-handler/discord=vesktop.desktop
+image/jpeg=imv.desktop
+image/png=imv.desktop
+video/webm=mpv.desktop
+x-scheme-handler/discord-1361252452329848892=discord-1361252452329848892.desktop
+application/x-directory=thunar.desktop
+extra=thunar.desktop
+safety=thunar.desktop
