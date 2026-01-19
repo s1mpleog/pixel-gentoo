@@ -1,4 +1,4 @@
-# Gruvbox Dark Theme for Mako
+icons=1
 font=Monocraft Nerd Font 11
 background-color=#282828FF
 text-color=#ebdbb2FF
@@ -11,7 +11,7 @@ margin=20
 padding=15,20
 
 # Icon settings
-icon-path=/usr/share/icons/Papirus-Dark
+icon-path=/home/s1mple/.icons/pixel-dream
 max-icon-size=48
 
 # Timeouts
