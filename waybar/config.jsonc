@@ -2,7 +2,7 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 30,
+  "height": 33,
   "spacing": 4,
   "modules-left": [
     "hyprland/workspaces",
@@ -13,12 +13,12 @@
   //   "hyprland/window"
   // ],
   "modules-right": [
+    "network",
     "wireplumber",
     "backlight",
-    "network",
     // "cpu",
     "memory",
-    "custom/disk",
+    // "custom/disk",
     "battery",
     "clock",
     "tray"
@@ -127,6 +127,7 @@
     "tooltip-format": "{timeTo}, {capacity}%"
   },
   "network": {
+    "format": "󰤨 {signalStrength}%",
     "format-wifi": "󰤨 {signalStrength}%",
     "format-ethernet": "󰈀 Connected",
     "format-disconnected": "󰤭 Down",
