@@ -1,0 +1,13 @@
+* {
+  background:       #282828F5;   /* main-bg */
+  foreground:       #CBCED3FF;   /* main-fg */
+  accent:           #85A583FF;   /* main-ex */
+  background-tb:    #475437FF;   /* select-bg */
+  border-tb:        #EBDBB2FF;   /* main-br (used as border/text-bright) */
+  border:           #83a598;
+  selected:         linear-gradient(to right, #475437FF, #85A58369); /* select-bg → semi-transparent accent */
+  button:           linear-gradient(#CBCED3FF); /* main-fg */
+  button-selected:  linear-gradient(#B5CC97FF); /* select-fg */
+  active:           linear-gradient(to right, #85A583FF, #B5CC97FF); /* main-ex → select-fg */
+  urgent:           #FB4934FF;   /* classic Gruvbox red (common urgent color) */
+}

@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Configuration
+readonly WALL_DIR="${HOME}/Pictures/Wallpapers"
+readonly THEME="${1:-default}"
+readonly CACHE_DIR="${HOME}/.cache/jp/${THEME}"
+readonly ROFI_CMD="rofi -dmenu -theme ~/.config/rofi/scripts/wallpaper/style.rasi"
+readonly PHYSICAL_MONITOR_SIZE=24
+readonly THUMBNAIL_SIZE=500
+
+# Ensure cache directory exists
+mkdir -p "${CACHE_DIR}"
+
+# Calculate monitor DPI and adjusted resolution
+calculate_monitor_res() {
+  local monitor_res
+  monitor_res=$(hyprctl monitors | grep -A2 'Monitor' | head -n 2 | awk '{print $1}' | grep -oE '^[0-9]+')
+
+  local dpi
+  dpi=$(printf "%.0f" "$(echo "scale=2; ${monitor_res} / ${PHYSICAL_MONITOR_SIZE}" | bc)")
+
+  echo $((monitor_res * PHYSICAL_MONITOR_SIZE / dpi))
+}
+
+# Generate thumbnail cache
+generate_thumbnails() {
+  local imagen nombre_archivo cache_file
+
+  for imagen in "${WALL_DIR}"/*.{jpg,jpeg,png,webp}; do
+    [[ -f "${imagen}" ]] || continue
+
+    nombre_archivo=$(basename "${imagen}")
+    # Force PNG format for thumbnails to ensure compatibility
+    cache_file="${CACHE_DIR}/${nombre_archivo%.*}.png"
+
+    if [[ ! -f "${cache_file}" ]]; then
+      magick "${imagen}" \
+        -strip \
+        -thumbnail "${THUMBNAIL_SIZE}x${THUMBNAIL_SIZE}^" \
+        -gravity center \
+        -extent "${THUMBNAIL_SIZE}x${THUMBNAIL_SIZE}" \
+        "PNG:${cache_file}"
+    fi
+  done
+}
+
+# Display wallpaper selector
+select_wallpaper() {
+  local monitor_res rofi_override
+  monitor_res=$(calculate_monitor_res)
+  rofi_override="element-icon{size:${monitor_res}px;border-radius:0px;}"
+
+  find "${WALL_DIR}" -maxdepth 1 -type f \
+    \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \) \
+    -exec basename {} \; | sort | while read -r filename; do
+    echo -en "${filename}\x00icon\x1f${CACHE_DIR}/${filename%.*}.png\n"
+  done | ${ROFI_CMD}
+}
+
+# Main execution
+main() {
+  generate_thumbnails
+
+  local wall_selection
+  wall_selection=$(select_wallpaper)
+
+  [[ -n "${wall_selection}" ]] || exit 1
+
+  swww img "${WALL_DIR}/${wall_selection}"
+
+  notify-send -u normal \
+    -i "${CACHE_DIR}/${wall_selection%.*}.png" \
+    "✨ Wallpaper Applied" \
+    "${wall_selection%.*}"
+}
+
+main "$@"

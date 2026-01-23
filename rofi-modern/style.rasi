@@ -1,0 +1,104 @@
+@theme "~/.config/rofi/theme/pixel-dream.rasi"
+
+
+
+window {
+    location:           center;
+    anchor:             center;
+    width:              720px;
+    border:             2px;
+    border-radius:      12px;
+    border-color:       @border;
+    background-color:   @background; /* Forces the dark background */
+}
+
+mainbox {
+    background-color:   transparent;
+    children:           [ "inputbar", "listview", "mode-switcher" ];
+}
+
+/* ──────────────────────────────────────────────── */
+/* Inputbar (Search) */
+inputbar {
+    padding:            20px 24px;
+    spacing:            12px;
+    background-color:   transparent;
+    children:           [ "prompt", "entry" ];
+}
+
+prompt {
+    padding:            8px 12px;
+    background-color:   @button;
+    text-color:         @accent;
+    border-radius:      4px;
+}
+
+entry {
+    padding:            8px 12px;
+    text-color:         @foreground;
+    background-color:   transparent;
+    placeholder:        "search...";
+    placeholder-color:  @border;
+    vertical-align:     0.5;
+}
+
+/* ──────────────────────────────────────────────── */
+/* Listview */
+listview {
+    columns:            1;
+    lines:              8;
+    spacing:            6px;
+    padding:            12px 24px;
+    background-color:   transparent;
+    fixed-height:       true;
+}
+
+element {
+    padding:            10px;
+    spacing:            12px;
+    border-radius:      8px;
+    background-color:   transparent;
+    text-color:         @foreground;
+}
+
+/* This fixes the "bright" selection issue you had earlier */
+element selected.normal {
+    background-color:   @button;      /* Darker gray-brown */
+    text-color:         @accent;      /* Yellow highlight text */
+    border:             2px solid;
+    border-color:       @accent;      /* Pixel-style border */
+}
+
+element-icon {
+    size:               32px;
+    background-color:   transparent;
+}
+
+element-text {
+    background-color:   transparent;
+    text-color:         inherit;
+    vertical-align:     0.5;
+}
+
+/* ──────────────────────────────────────────────── */
+/* Mode Switcher (Bottom Tabs) */
+mode-switcher {
+    spacing:            12px;
+    padding:            16px 24px;
+    background-color:   @button;      /* The bottom bar background */
+}
+
+button {
+    padding:            10px;
+    border-radius:      8px;
+    background-color:   @background;  /* Dark buttons */
+    text-color:         @foreground;  /* Visible text */
+    cursor:             pointer;
+    vertical-align:     0.5;
+    horizontal-align:   0.5;
+}
+
+button selected {
+    background-color:   @accent;      /* Highlighted tab */
+    text-color:         @background;  /* Dark text on yellow background */
+}

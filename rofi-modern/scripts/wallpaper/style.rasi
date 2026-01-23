@@ -1,0 +1,113 @@
+// Modern Wallpaper Selector Theme - Gruvbox Edition
+
+configuration {
+    modi:                        "drun";
+    show-icons:                  true;
+    drun-display-format:         "{name}";
+    font:                        "Monocraft Nerd Font 10";
+}
+
+* {
+    background:       #1d2021ff;
+    foreground:       #ebdbb2ff;
+    accent:           #d79921ff;
+    background-tb:    #98971aff;
+    border-tb:        #fabd2fff;
+    border:           #665c54ff;
+    selected:         #3c3836ff;
+    button:           #504945ff;
+    button-selected:  #d79921ff;
+    active:           #fabd2fff;
+    urgent:           #ea6962ff;
+    
+    background-color: transparent;
+    text-color:       @foreground;
+}
+
+window {
+    enabled:          true;
+    fullscreen:       false;
+    width:            100%;
+    height:           100%;
+    transparency:     "real";
+    cursor:           "default";
+    background-color: transparent;
+}
+
+mainbox {
+    enabled:          true;
+    orientation:      vertical;
+    spacing:          0px;
+    children:         [ "dummy", "listview", "dummy" ];
+    background-color: transparent;
+}
+
+dummy {
+    expand:           true;
+    background-color: transparent;
+}
+
+listview {
+    enabled:          true;
+    columns:          5;
+    lines:            2;
+    spacing:          24px;
+    padding:          40px;
+    cycle:            true;
+    scrollbar:        false;
+    layout:           vertical;
+    background-color: @background;
+    border-radius:    16px;
+    border:           2px solid;
+    border-color:     @border;
+}
+
+element {
+    enabled:          true;
+    orientation:      vertical;
+    spacing:          12px;
+    padding:          16px;
+    border-radius:    12px;
+    cursor:           pointer;
+    background-color: @button;
+    text-color:       @foreground;
+}
+
+element selected.normal {
+    background-color: @selected;
+    text-color:       @accent;
+    border:           3px solid;
+    border-color:     @background-tb;
+}
+
+element-icon {
+    size:             180px;
+    cursor:           inherit;
+    border-radius:    8px;
+    background-color: transparent;
+}
+
+element-text {
+    vertical-align:   0.5;
+    horizontal-align: 0.5;
+    padding:          8px 12px;
+    cursor:           inherit;
+    background-color: transparent;
+    text-color:       inherit;
+    font:             "Monocraft Nerd Font 10";
+}
+
+element selected.normal element-text {
+    font:             "Monocraft Nerd Font Bold 10";
+}
+
+@media(max-aspect-ratio: 1.5) {
+    listview {
+        columns:      3;
+        lines:        3;
+    }
+    
+    element-icon {
+        size:         140px;
+    }
+}

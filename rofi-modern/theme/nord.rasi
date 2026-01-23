@@ -1,0 +1,27 @@
+* {
+  // background:       #2E3440CC; 
+   background:       #2E3440; 
+  foreground:       #D8DEE9FF; /* nord4 (text) */
+  accent:           #4C566A99; /* nord3 (subtle accent) */
+
+  background-tb:    #3B4252FF; /* nord1 (surface) */
+  border-tb:        #434C5EFF; /* nord2 (border) */
+
+  selected:         linear-gradient(
+                      to right,
+                      #434C5EFF,
+                      #81A1C166
+                    );
+
+  button:           linear-gradient(#5E81ACFF); /* nord10 */
+  button-selected:  linear-gradient(#81A1C1FF); /* nord9 */
+
+  active:           linear-gradient(
+                      to right,
+                      #88C0D0FF, /* nord8 */
+                      #A3BE8CFF  /* nord14 */
+                    );
+
+  urgent:           #BF616AFF; /* nord11 */
+}
+
