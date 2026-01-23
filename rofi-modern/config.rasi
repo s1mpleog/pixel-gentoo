@@ -25,5 +25,8 @@ configuration {
     // kb-row-up:                   "Control+k,Up";
     // kb-row-down:                 "Control+j,Down";
     kb-accept-entry:             "Return,KP_Enter";
+
+    me-select-entry:            "";         /* Disables selecting on hover/click so 'accept' can trigger */
+    me-accept-entry:            "MousePrimary"; /* Triggers launch on left click */
 }
 @theme "style"
