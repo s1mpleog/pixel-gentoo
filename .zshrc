@@ -10,6 +10,7 @@ setopt SHARE_HISTORY INC_APPEND_HISTORY HIST_IGNORE_DUPS HIST_FIND_NO_DUPS
 # Environment variables (set early)
 export EDITOR='nvim'
 export PATH=$PATH:/home/s1mple/.spicetify
+export PATH="$HOME/.local/bin:$PATH"
 
 # Antidote - only load when regenerating bundles
 zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins
@@ -37,6 +38,13 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
+bindkey '^?' backward-delete-char  # Backspace
+bindkey '^[[3~' delete-char        # Delete
+bindkey '^[[H' beginning-of-line   # Home
+bindkey '^[[F' end-of-line         # End
+bindkey '^[[1;5C' forward-word     # Ctrl+Right
+bindkey '^[[1;5D' backward-word    # Ctrl+Left
+
 # Functions
 function record() {
     local datetime=$(date +%Y-%m-%d_%H-%M-%S)
@@ -47,7 +55,6 @@ function record() {
 
 # Aliases
 alias cd='z'
-alias n='nvim .'
 alias ls='eza -a --icons --git --group-directories-first'
 alias ll='eza -al --icons --git --header --group'
 alias lt='eza -a --tree --level=2 --icons --git-ignore'
@@ -57,6 +64,9 @@ alias llt='eza -al --icons --git --sort=modified --reverse'
 alias lls='eza -al --icons --git --sort=size --reverse'
 alias lsd='eza -aD --icons'
 alias lla='eza -al --icons --git --header --group --extended --octal-permissions'
+
+alias n="nvim"
+
 
 # Deferred initialization - runs after prompt
 function _deferred_init() {
@@ -79,6 +89,56 @@ function _deferred_init() {
     # Other deferred initializations
     compdef eza=ls
     eval "$(zoxide init zsh)"
+
+# fzf manual key bindings for zsh
+    if command -v fzf &> /dev/null; then
+        # Ctrl+R - command history
+        fzf-history-widget() {
+            local selected
+            selected=$(fc -rl 1 | fzf --query="$LBUFFER" --tac --no-sort)
+            if [[ -n $selected ]]; then
+                LBUFFER=$(echo $selected | sed 's/^[ ]*[0-9]*\*\?[ ]*//')
+            fi
+            zle reset-prompt
+        }
+        zle -N fzf-history-widget
+        bindkey '^R' fzf-history-widget
+        
+        # Ctrl+T - file search
+        fzf-file-widget() {
+            local selected
+            selected=$(eval "$FZF_CTRL_T_COMMAND" | fzf)
+            if [[ -n $selected ]]; then
+                LBUFFER="${LBUFFER}${selected}"
+            fi
+            zle reset-prompt
+        }
+        zle -N fzf-file-widget
+        bindkey '^T' fzf-file-widget
+        
+        # Alt+C - cd to directory
+        fzf-cd-widget() {
+            local selected
+            selected=$(eval "$FZF_ALT_C_COMMAND" | fzf)
+            if [[ -n $selected ]]; then
+                cd "$selected"
+            fi
+            zle reset-prompt
+        }
+        zle -N fzf-cd-widget
+        bindkey '^[c' fzf-cd-widget
+    fi
+
+if [[ -f /usr/share/fzf/shell/key-bindings.zsh ]]; then
+        source /usr/share/fzf/shell/key-bindings.zsh
+    elif [[ -f ~/.fzf/shell/key-bindings.zsh ]]; then
+        source ~/.fzf/shell/key-bindings.zsh
+    fi
+    
+    fpath+=/usr/share/zsh/site-functions
+
+
+[ -s "/home/s1mple/.bun/_bun" ] && source "/home/s1mple/.bun/_bun"
 }
 
 # Schedule deferred init
@@ -94,3 +154,11 @@ eval "$(starship init zsh --print-full-init)"
 
 # Uncomment for profiling only
 # zprof
+
+# bun completions
+
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$HOME/.npm-global/bin:$PATH"
