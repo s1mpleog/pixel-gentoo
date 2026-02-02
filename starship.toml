@@ -1,0 +1,38 @@
+format = """[\\[](bold green)$username[@](bold green)$hostname[:](bold green)$directory[\\]](bold green)$character"""
+
+[username]
+style_user = "bold green"
+style_root = "bold red"
+format = "[$user]($style)"
+show_always = true
+
+[hostname]
+ssh_only = false
+format = "[$hostname]($style)"
+style = "bold green"
+
+[directory]
+style = "bold green"
+truncation_length = 0
+truncate_to_repo = false
+format = "[$path]($style)"
+
+[character]
+success_symbol = "[\\$](bold green) "
+error_symbol = "[\\$](bold red) "
+
+# Disable everything else
+[git_branch]
+disabled = true
+
+[git_status]
+disabled = true
+
+[cmd_duration]
+disabled = true
+
+[battery]
+disabled = true
+
+[time]
+disabled = true
