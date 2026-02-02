@@ -5,12 +5,15 @@
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
-setopt SHARE_HISTORY INC_APPEND_HISTORY HIST_IGNORE_DUPS HIST_FIND_NO_DUPS
+setopt SHARE_HISTORY INC_APPEND_HISTORY HIST_IGNORE_DUPS HIST_FIND_NO_DUPS HIST_IGNORE_SPACE
 
 # Environment variables (set early)
 export EDITOR='nvim'
 export PATH=$PATH:/home/s1mple/.spicetify
 export PATH="$HOME/.local/bin:$PATH"
+
+
+export TERM=xterm-256color
 
 # Antidote - only load when regenerating bundles
 zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins
@@ -30,14 +33,15 @@ source ${zsh_plugins}.zsh
     zcompile ${zsh_plugins}.zsh
 
 # Autosuggestions configuration (after plugin load)
-ZSH_AUTOSUGGEST_USE_ASYNC=1
-ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+# ZSH_AUTOSUGGEST_USE_ASYNC=1
+# ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+#ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
 # Key bindings
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
+bindkey '-e'
 bindkey '^?' backward-delete-char  # Backspace
 bindkey '^[[3~' delete-char        # Delete
 bindkey '^[[H' beginning-of-line   # Home
@@ -90,52 +94,41 @@ function _deferred_init() {
     compdef eza=ls
     eval "$(zoxide init zsh)"
 
-# fzf manual key bindings for zsh
-    if command -v fzf &> /dev/null; then
-        # Ctrl+R - command history
-        fzf-history-widget() {
-            local selected
-            selected=$(fc -rl 1 | fzf --query="$LBUFFER" --tac --no-sort)
-            if [[ -n $selected ]]; then
-                LBUFFER=$(echo $selected | sed 's/^[ ]*[0-9]*\*\?[ ]*//')
-            fi
-            zle reset-prompt
-        }
-        zle -N fzf-history-widget
-        bindkey '^R' fzf-history-widget
-        
-        # Ctrl+T - file search
-        fzf-file-widget() {
-            local selected
-            selected=$(eval "$FZF_CTRL_T_COMMAND" | fzf)
-            if [[ -n $selected ]]; then
-                LBUFFER="${LBUFFER}${selected}"
-            fi
-            zle reset-prompt
-        }
-        zle -N fzf-file-widget
-        bindkey '^T' fzf-file-widget
-        
-        # Alt+C - cd to directory
-        fzf-cd-widget() {
-            local selected
-            selected=$(eval "$FZF_ALT_C_COMMAND" | fzf)
-            if [[ -n $selected ]]; then
-                cd "$selected"
-            fi
-            zle reset-prompt
-        }
-        zle -N fzf-cd-widget
-        bindkey '^[c' fzf-cd-widget
-    fi
-
-if [[ -f /usr/share/fzf/shell/key-bindings.zsh ]]; then
+ # fzf - use official key bindings if available, otherwise manual
+    if [[ -f /usr/share/fzf/shell/key-bindings.zsh ]]; then
         source /usr/share/fzf/shell/key-bindings.zsh
     elif [[ -f ~/.fzf/shell/key-bindings.zsh ]]; then
         source ~/.fzf/shell/key-bindings.zsh
+    else
+        # Fallback to manual bindings only if official ones don't exist
+        if command -v fzf &> /dev/null; then
+            fzf-history-widget() {
+                local selected
+                selected=$(fc -rl 1 | fzf +s --query="$LBUFFER")
+                #selected=$(fc -rl 1 | fzf +s --tac --query="$LBUFFER")
+                if [[ -n $selected ]]; then
+                    LBUFFER=$(echo $selected | sed 's/^[ ]*[0-9]*\*\?[ ]*//')
+                fi
+                zle reset-prompt
+            }
+            zle -N fzf-history-widget
+            bindkey '^R' fzf-history-widget
+        fi
     fi
     
     fpath+=/usr/share/zsh/site-functions
+
+export FZF_DEFAULT_OPTS='
+  --layout=reverse
+  --border
+  --inline-info
+  --color=bg+:#3c3836,bg:#1d2021,spinner:#fb4934,hl:#b8bb26
+  --color=fg:#d5c4a1,header:#b8bb26,info:#fabd2f,pointer:#fb4934
+  --color=marker:#fb4934,fg+:#ebdbb2,prompt:#fb4934,hl+:#b8bb26'
+
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
 
 
 [ -s "/home/s1mple/.bun/_bun" ] && source "/home/s1mple/.bun/_bun"
