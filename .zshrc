@@ -104,8 +104,12 @@ function _deferred_init() {
         if command -v fzf &> /dev/null; then
             fzf-history-widget() {
                 local selected
-                selected=$(fc -rl 1 | fzf +s --query="$LBUFFER")
-                #selected=$(fc -rl 1 | fzf +s --tac --query="$LBUFFER")
+                #selected=$(fc -rl 1 | fzf +s --query="$LBUFFER")
+                selected=$(fc -rl 1 | fzf +s --query="$LBUFFER" --no-hscroll --bind 'ctrl-/:toggle-preview' --preview 'echo {}' --preview-window 'hidden:wrap')
+               
+                # selected=$(fc -rl 1 | fzf +s --query="$LBUFFER")
+
+                # selected=$(fc -rl 1 | fzf +s --query="$LBUFFER" --no-multi --wrap)
                 if [[ -n $selected ]]; then
                     LBUFFER=$(echo $selected | sed 's/^[ ]*[0-9]*\*\?[ ]*//')
                 fi
