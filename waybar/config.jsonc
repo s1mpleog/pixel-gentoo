@@ -2,7 +2,7 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 33,
+  "height": 30,
   "spacing": 4,
   "modules-left": [
     "hyprland/workspaces",
@@ -25,34 +25,6 @@
   ],
   "custom/logo": {
     "format": "Arch",
-    "tooltip": false
-  },
-  "custom/sep2": {
-    "format": "|",
-    "tooltip": false
-  },
-  "custom/sep3": {
-    "format": "|",
-    "tooltip": false
-  },
-  "custom/sep4": {
-    "format": "|",
-    "tooltip": false
-  },
-  "custom/sep5": {
-    "format": "|",
-    "tooltip": false
-  },
-  "custom/sep6": {
-    "format": "|",
-    "tooltip": false
-  },
-  "custom/sep7": {
-    "format": "|",
-    "tooltip": false
-  },
-  "custom/sep8": {
-    "format": "|",
     "tooltip": false
   },
   "hyprland/workspaces": {
