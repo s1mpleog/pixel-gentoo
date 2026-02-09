@@ -11,6 +11,7 @@ setopt SHARE_HISTORY INC_APPEND_HISTORY HIST_IGNORE_DUPS HIST_FIND_NO_DUPS HIST_
 export EDITOR='nvim'
 export PATH=$PATH:/home/s1mple/.spicetify
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
 # Colorful man pages
 export LESS_TERMCAP_mb=$'\e[1;31m'     # begin bold (red)
