@@ -11,4 +11,4 @@ if test -z "$XDG_RUNTIME_DIR"; then
 fi
 
 gentoo-pipewire-launcher restart &
-exec dbus-run-session Hyprland
+exec dbus-run-session start-hyprland
