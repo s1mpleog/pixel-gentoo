@@ -165,6 +165,8 @@ eval "$(starship init zsh --print-full-init)"
 # bun completions
 
 
+# PROMPT='%F{9}[%F{11}%n%F{10}@%F{12}%m %F{13}%~%F{9}]%f$ '
+
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
