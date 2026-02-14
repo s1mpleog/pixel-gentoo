@@ -1,0 +1,219 @@
+/* ~/.config/waybar/style.css */
+* {
+    font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: rgba(40, 40, 40, 0.90);
+    color: #ebdbb2;
+    transition: background-color 0.2s;
+}
+
+/* Workspaces */
+#workspaces {
+    background-color: transparent;
+    margin: 6px 0px 6px 12px;
+    padding: 0;
+}
+
+#workspaces button {
+    padding: 0 3px;
+    margin: 0 3px;
+    color: #7c6f64;
+    background-color: transparent;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    border: 2px solid transparent;
+}
+
+#workspaces button.active {
+    color: #fabd2f;
+    background-color: #32302f;
+    border: 2px solid #3c3836;
+}
+
+#workspaces button:hover {
+    background-color: #32302f;
+    color: #d5c4a1;
+}
+
+/* Window title */
+#window {
+    margin: 6px 12px;
+    padding: 0 12px;
+    color: #a89984;
+    background-color: transparent;
+    font-weight: 500;
+}
+
+/* Clock - centered and prominent */
+#clock {
+    margin: 6px 12px;
+    padding: 0 20px;
+    background: linear-gradient(90deg, #32302f 0%, #3c3836 100%);
+    color: #ebdbb2;
+    border-radius: 8px;
+    font-weight: 700;
+    border: 1px solid #504945;
+}
+
+/* Right modules container styling */
+#cpu,
+#memory,
+#battery,
+#backlight,
+#network,
+#custom-disk,
+#idle_inhibitor,
+#wireplumber {
+    margin: 6px 3px;
+    padding: 0 14px;
+    border-radius: 8px;
+    background-color: #32302f;
+    border: 1px solid #3c3836;
+    transition: all 0.2s ease;
+}
+
+#cpu:hover,
+#memory:hover,
+#battery:hover,
+#backlight:hover,
+#network:hover,
+#wireplumber:hover {
+    background-color: #3c3836;
+    border-color: #504945;
+}
+
+#cpu {
+    color: #b8bb26;
+}
+
+#memory {
+    color: #fabd2f;
+}
+
+#backlight {
+    color: #fe8019;
+}
+
+#battery {
+    color: #8ec07c;
+}
+
+#battery.charging {
+    color: #b8bb26;
+    background-color: #32302f;
+}
+
+#battery.warning:not(.charging) {
+    color: #fabd2f;
+    background-color: #32302f;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #cc241d;
+    color: #fbf1c7;
+    border-color: #fb4934;
+    animation: blink 0.8s linear infinite alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: #fb4934;
+        border-color: #cc241d;
+    }
+}
+
+#network {
+    color: #83a598;
+}
+
+#network.disconnected {
+    color: #fb4934;
+    background-color: #32302f;
+}
+
+#wireplumber {
+    color: #d3869b;
+}
+
+#wireplumber.muted {
+    color: #665c54;
+    background-color: #282828;
+}
+
+#tray {
+    background-color: #32302f;
+    margin: 6px 12px 6px 3px;
+    padding: 0 10px;
+    border-radius: 8px;
+    border: 1px solid #3c3836;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #cc241d;
+    border-radius: 6px;
+}
+
+#custom-disk {
+    margin: 6px 3px;
+    padding: 0 14px;
+    border-radius: 8px;
+    background-color: #32302f;
+    color: #83a598;
+    border: 1px solid #3c3836;
+    transition: all 0.2s ease;
+}
+
+#custom-disk:hover {
+    background-color: #3c3836;
+    border-color: #504945;
+}
+
+#idle_inhibitor {
+    margin: 6px 3px;
+    padding: 0 14px;
+    border-radius: 8px;
+    background-color: #32302f;
+    border: 1px solid #3c3836;
+    transition: all 0.2s ease;
+}
+
+#idle_inhibitor:hover {
+    background-color: #3c3836;
+    border-color: #504945;
+}
+
+#idle_inhibitor.activated {
+    color: #fabd2f;  /* Yellow when active */
+    background-color: #3c3836;
+}
+
+#idle_inhibitor.deactivated {
+    color: #7c6f64;  /* Muted gray when inactive */
+    background-color: #32302f;
+}
+
+/* Tooltips */
+tooltip {
+    background-color: #1d2021;
+    border: 2px solid #504945;
+    border-radius: 8px;
+    color: #ebdbb2;
+    padding: 8px;
+}
+
+tooltip label {
+    color: #ebdbb2;
+    padding: 4px;
+}
