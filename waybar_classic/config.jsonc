@@ -13,11 +13,11 @@
   //   "hyprland/window"
   // ],
   "modules-right": [
+    "network",
+    "custom/sep3",
     "wireplumber",
     "custom/sep2",
     "backlight",
-    "custom/sep3",
-    "network",
     "custom/sep4",
     // "cpu",
     // "custom/sep5",
