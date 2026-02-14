@@ -146,6 +146,9 @@ export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
 
 
 [ -s "/home/s1mple/.bun/_bun" ] && source "/home/s1mple/.bun/_bun"
+
+
+autoload -Uz colors && colors
 }
 
 # Schedule deferred init
@@ -154,7 +157,7 @@ zsh-defer _deferred_init
 # Starship prompt (keep synchronous for instant prompt)
 # eval "$(starship init zsh)"
 # Replace synchronous starship with instant prompt
-eval "$(starship init zsh --print-full-init)"
+# eval "$(starship init zsh --print-full-init)"
 
 # Compile .zshrc for faster loading
 [[ ! -f ~/.zshrc.zwc ]] || [[ ~/.zshrc -nt ~/.zshrc.zwc ]] && zcompile ~/.zshrc
@@ -162,10 +165,11 @@ eval "$(starship init zsh --print-full-init)"
 # Uncomment for profiling only
 # zprof
 
+
 # bun completions
+PROMPT='%F{9}[%F{11}%n%F{10}@%F{12}%m %F{13}%~%F{9}]%f$ '
 
-
-# PROMPT='%F{9}[%F{11}%n%F{10}@%F{12}%m %F{13}%~%F{9}]%f$ '
+unsetopt PROMPT_SP
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
