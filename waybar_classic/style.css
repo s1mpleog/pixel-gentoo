@@ -21,7 +21,7 @@
 window#waybar {
     background-color: @main-bg;
     color: @main-fg;;
-    border-bottom: 2px solid #3c3836;
+    /* border-bottom: 2px solid #3c3836; */
 }
 
 /* Logo */
@@ -64,8 +64,8 @@ window#waybar {
 }
 
 #workspaces button.active {
-    color: #ddc7a1;
-    /* background-color: #3c3836; */
+    color: @wb-act-fg;
+    background-color: #a9b665;
 }
 
 #workspaces button:hover {
