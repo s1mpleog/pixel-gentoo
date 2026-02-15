@@ -2,14 +2,14 @@
 # zmodload zsh/zprof
 
 # History configuration (move to top - lightweight)
-HISTFILE=~/.zsh_history
+HISTFILE="$ZDOTDIR/.zsh_history"
 HISTSIZE=10000
 SAVEHIST=10000
 setopt SHARE_HISTORY INC_APPEND_HISTORY HIST_IGNORE_DUPS HIST_FIND_NO_DUPS HIST_IGNORE_SPACE
 
 # Environment variables (set early)
 export EDITOR='nvim'
-export PATH=$PATH:/home/s1mple/.spicetify
+export PATH=$PATH:"$HOME/.spicetify"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 
@@ -30,7 +30,8 @@ zsh_plugins=${ZDOTDIR:-~}/.zsh_plugins
 
 # Regenerate only when plugin list changes
 if [[ ! -f ${zsh_plugins}.zsh ]] || [[ ${zsh_plugins}.txt -nt ${zsh_plugins}.zsh ]]; then
-    source ~/.antidote/antidote.zsh
+    #source "${XDG_DATA_HOME:-$HOME/.local/share}/antidote/antidote.zsh"
+    source "$HOME/.antidote/antidote.zsh"
     antidote bundle <${zsh_plugins}.txt >|${zsh_plugins}.zsh
 fi
 
@@ -87,24 +88,24 @@ function _deferred_init() {
     # Completion system - deferred and cached
     autoload -Uz compinit
     zstyle ':completion:*' use-cache on
-    zstyle ':completion:*' cache-path ~/.zsh/cache
+    zstyle ':completion:*' cache-path "$ZDOTDIR/.zsh/cache"
     
     # Run full compinit only if dump is >24h old or missing
-    if [[ -n ${ZDOTDIR:-$HOME}/.zcompdump(#qN.mh+24) ]]; then
-        compinit -d "${ZDOTDIR:-$HOME}/.zcompdump"
+    if [[ -n $ZDOTDIR/.zcompdump(#qN.mh+24) ]]; then
+        compinit -d "$ZDOTDIR/.zcompdump"
     else
-        compinit -C -d "${ZDOTDIR:-$HOME}/.zcompdump"
+        compinit -C -d "$ZDOTDIR/.zcompdump"
     fi
     
     # Compile compdump for faster loading
-    [[ "${ZDOTDIR:-$HOME}/.zcompdump" -nt "${ZDOTDIR:-$HOME}/.zcompdump.zwc" ]] && \
-        zcompile "${ZDOTDIR:-$HOME}/.zcompdump"
+    [[ "$ZDOTDIR/.zcompdump" -nt "$ZDOTDIR/.zcompdump.zwc" ]] && \
+        zcompile "$ZDOTDIR/.zcompdump"
     
     # Other deferred initializations
     compdef eza=ls
     eval "$(zoxide init zsh)"
 
- # fzf - use official key bindings if available, otherwise manual
+    # fzf - use official key bindings if available, otherwise manual
     if [[ -f /usr/share/fzf/shell/key-bindings.zsh ]]; then
         source /usr/share/fzf/shell/key-bindings.zsh
     elif [[ -f ~/.fzf/shell/key-bindings.zsh ]]; then
@@ -132,23 +133,21 @@ function _deferred_init() {
     
     fpath+=/usr/share/zsh/site-functions
 
-export FZF_DEFAULT_OPTS='
-  --layout=reverse
-  --border
-  --inline-info
-  --color=bg+:#3c3836,bg:#1d2021,spinner:#fb4934,hl:#b8bb26
-  --color=fg:#d5c4a1,header:#b8bb26,info:#fabd2f,pointer:#fb4934
-  --color=marker:#fb4934,fg+:#ebdbb2,prompt:#fb4934,hl+:#b8bb26'
+    export FZF_DEFAULT_OPTS='
+      --layout=reverse
+      --border
+      --inline-info
+      --color=bg+:#3c3836,bg:#1d2021,spinner:#fb4934,hl:#b8bb26
+      --color=fg:#d5c4a1,header:#b8bb26,info:#fabd2f,pointer:#fb4934
+      --color=marker:#fb4934,fg+:#ebdbb2,prompt:#fb4934,hl+:#b8bb26'
 
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude .git'
 
+    [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-[ -s "/home/s1mple/.bun/_bun" ] && source "/home/s1mple/.bun/_bun"
-
-
-autoload -Uz colors && colors
+    autoload -Uz colors && colors
 }
 
 # Schedule deferred init
@@ -160,11 +159,10 @@ zsh-defer _deferred_init
 # eval "$(starship init zsh --print-full-init)"
 
 # Compile .zshrc for faster loading
-[[ ! -f ~/.zshrc.zwc ]] || [[ ~/.zshrc -nt ~/.zshrc.zwc ]] && zcompile ~/.zshrc
+[[ ! -f $ZDOTDIR/.zshrc.zwc ]] || [[ $ZDOTDIR/.zshrc -nt $ZDOTDIR/.zshrc.zwc ]] && zcompile $ZDOTDIR/.zshrc
 
 # Uncomment for profiling only
 # zprof
-
 
 # bun completions
 PROMPT='%F{9}[%F{11}%n%F{10}@%F{12}%m %F{13}%~%F{9}]%f$ '
